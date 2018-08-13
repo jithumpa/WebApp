@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - WebApp App</title>
+
+    <link rel="shortcut icon" href="~/Content/Images/favicon.ico">
+
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/switchery")
+    @Styles.Render("~/Content/WebApp-alert")
+
+    @RenderSection("css", required: false)
+
+    <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+
+</head>
+<body class="fixed-left">
+
+    @Html.Partial("_Loader")
+
+    <div id="wrapper">
+
+        @Html.Partial("_TopBar")
+
+        @Html.Partial("_LeftSideBar")
+
+        <div class="content-page">
+            <div class="content">
+                <div class="container">
+
+                    @RenderBody()
+
+                </div>
+            </div>
+        </div>
+
+        @Html.Partial("_RightSideSettingsBar")
+
+    </div>
+
+    <script>
+        var resizefunc = [];
+    </script>
+
+
+    @Scripts.Render("~/bundles/scripts")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/app")
+    @Scripts.Render("~/bundles/switchery")
+    @Scripts.Render("~/bundles/WebApp-alert")
+    <script type="text/javascript">
+        $(document).ready(function () {         
+
+            var errorMessage = '@TempData["ErrorMsg"]';
+            if (errorMessage != '' && errorMessage != 'null' && errorMessage != null) {
+                ErrorMessage(errorMessage);
+            }
+            var successMessage = '@TempData["SuccessMsg"]';
+            if (successMessage != '' && successMessage != 'null' && successMessage != null) {
+                SuccessMessage(successMessage);
+            }
+
+            var infoMessage = '@TempData["InfoMsg"]';
+            if (infoMessage != '' && infoMessage != 'null' && infoMessage != null) {
+                InfoMessage(infoMessage);
+            }
+
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
